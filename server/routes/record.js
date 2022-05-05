@@ -13,7 +13,7 @@ recordRoutes.route('/listings').get(async function (_req, res) {
   const dbConnect = dbo.getDb();
 
   dbConnect
-    .collection('sampleCollection')
+    .collection('recipe')
     .find({})
     .limit(50)
     .toArray(function (err, result) {
@@ -26,15 +26,18 @@ recordRoutes.route('/listings').get(async function (_req, res) {
 });
 
 // This section will help you create a new record.
-recordRoutes.route('/listings/recordSwipe').post(function (req, res) {
+recordRoutes.route('/recipe/add').post(function (req, res) {
   const dbConnect = dbo.getDb();
   const matchDocument = {
-    Name: req.body.Name,
-    City: req.body.City,
+    title: req.body.title,
+    size: req.body.size,
+    id: req.body.id,
+    Description: req.body.Description,
+    linkURL: req.body.linkURL,
   };
 
   dbConnect
-    .collection('sampleCollection')
+    .collection('recipe')
     .insertOne(matchDocument, function (err, result) {
       if (err) {
         res.status(400).send('Error inserting matches!');
@@ -56,7 +59,7 @@ recordRoutes.route('/listings/updateLike').post(function (req, res) {
   };
 
   dbConnect
-    .collection('sampleCollection')
+    .collection('recipe')
     .updateOne(listingQuery, updates, function (err, _result) {
       if (err) {
         res
