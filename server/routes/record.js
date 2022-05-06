@@ -34,6 +34,7 @@ recordRoutes.route('/recipe/add').post(function (req, res) {
     id: req.body.id,
     Description: req.body.Description,
     linkURL: req.body.linkURL,
+    imageURL: req.body.imageURL
   };
 
   dbConnect
